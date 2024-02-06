@@ -1,5 +1,7 @@
 package net.kaupenjoe.mccourse.block.custom;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,29 +15,34 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class SoundBlock extends Block {
-    public SoundBlock(Properties pProperties) {
-        super(pProperties);
-    }
+	public SoundBlock(Properties pProperties) {
+		super(pProperties);
+	}
 
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if(!pLevel.isClientSide() && pHand == InteractionHand.MAIN_HAND) {
-            if(pPlayer.isCrouching()) {
-                pLevel.playSound(null, pPos, SoundEvents.NOTE_BLOCK_BANJO.get(), SoundSource.BLOCKS, 1f, 1f);
-                return InteractionResult.SUCCESS;
-            } else {
-                pLevel.playSound(null, pPos, SoundEvents.NOTE_BLOCK_COW_BELL.get(), SoundSource.BLOCKS, 1f, 1f);
-                return InteractionResult.CONSUME;
-            }
-        }
+	@SuppressWarnings("deprecation")
+	@Override
+	public @NotNull InteractionResult use(
+		@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
+		@NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+		if (!pLevel.isClientSide() && pHand == InteractionHand.MAIN_HAND) {
+			if (pPlayer.isCrouching()) {
+				pLevel.playSound(null, pPos, SoundEvents.NOTE_BLOCK_BANJO.get(),
+					SoundSource.BLOCKS, 1f, 1f);
+				return InteractionResult.SUCCESS;
+			} else {
+				pLevel.playSound(null, pPos, SoundEvents.NOTE_BLOCK_COW_BELL.get(),
+					SoundSource.BLOCKS, 1f, 1f);
+				return InteractionResult.CONSUME;
+			}
+		}
+		return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+	}
 
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-    }
-
-    @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        pLevel.playSound(pEntity, pPos, SoundEvents.NOTE_BLOCK_BIT.get(), SoundSource.BLOCKS, 1f, 1f);
-        super.stepOn(pLevel, pPos, pState, pEntity);
-    }
+	@Override
+	public void stepOn(
+		Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @NotNull Entity pEntity) {
+		pLevel.playSound(pEntity, pPos, SoundEvents.NOTE_BLOCK_BIT.get(),
+			SoundSource.BLOCKS, 1f, 1f);
+		super.stepOn(pLevel, pPos, pState, pEntity);
+	}
 }
