@@ -15,21 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mccourse:raw_alexandrite_block"
+        "recipe": "minecraft:raw_alexandrite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_alexandrite_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_alexandrite_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mccourse:raw_alexandrite_block"
+      "minecraft:raw_alexandrite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
