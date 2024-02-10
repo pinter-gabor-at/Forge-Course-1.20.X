@@ -1,6 +1,8 @@
 package net.kaupenjoe.mccourse.block.custom;
 
 import net.kaupenjoe.mccourse.item.ModItems;
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -9,30 +11,30 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class KohlrabiCropBlock extends CropBlock {
-    public static final int MAX_AGE = 6;
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
+	public static final int MAX_AGE = 6;
+	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
 
-    public KohlrabiCropBlock(Properties pProperties) {
-        super(pProperties);
-    }
+	public KohlrabiCropBlock(Properties pProperties) {
+		super(pProperties);
+	}
 
-    @Override
-    protected ItemLike getBaseSeedId() {
-        return ModItems.KOHLRABI_SEEDS.get();
-    }
+	@Override
+	protected @NotNull ItemLike getBaseSeedId() {
+		return ModItems.KOHLRABI_SEEDS.get();
+	}
 
-    @Override
-    public IntegerProperty getAgeProperty() {
-        return AGE;
-    }
+	@Override
+	public @NotNull IntegerProperty getAgeProperty() {
+		return AGE;
+	}
 
-    @Override
-    public int getMaxAge() {
-        return MAX_AGE;
-    }
+	@Override
+	public int getMaxAge() {
+		return MAX_AGE;
+	}
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(AGE);
-    }
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+		pBuilder.add(AGE);
+	}
 }
