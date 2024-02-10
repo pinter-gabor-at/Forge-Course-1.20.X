@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_alexandrite_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_alexandrite_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "mccourse:alexandrite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
