@@ -14,13 +14,6 @@ import net.kaupenjoe.mccourse.potion.BetterBrewingRecipe;
 import net.kaupenjoe.mccourse.potion.ModPotions;
 import net.kaupenjoe.mccourse.sound.ModSounds;
 import net.kaupenjoe.mccourse.villager.ModVillagers;
-import net.minecraft.core.Registry;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -34,7 +27,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+
 // The value here should match an entry in the META-INF/mods.toml file
+@SuppressWarnings("unused")
 @Mod(MCCourseMod.MOD_ID)
 public class MCCourseMod {
     public static final String MOD_ID = "mccourse";
@@ -42,39 +43,31 @@ public class MCCourseMod {
 
     public MCCourseMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         ModCreativeModeTabs.register(modEventBus);
-
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
         ModEnchantments.register(modEventBus);
         ModSounds.register(modEventBus);
-
         ModLootModifiers.register(modEventBus);
         ModPaintings.register(modEventBus);
-
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
-
         ModVillagers.register(modEventBus);
         ModParticles.register(modEventBus);
-
         modEventBus.addListener(this::commonSetup);
-
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
 
+	@SuppressWarnings({"Convert2MethodRef", "RedundantSuppression"})
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ComposterBlock.COMPOSTABLES.put(ModItems.KOHLRABI.get(), 0.35f);
             ComposterBlock.COMPOSTABLES.put(ModItems.KOHLRABI_SEEDS.get(), 0.20f);
-
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.SNAPDRAGON.getId(), ModBlocks.POTTED_SNAPDRAGON);
-
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION.get()));
-
+			((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+				ModBlocks.SNAPDRAGON.getId(), ModBlocks.POTTED_SNAPDRAGON);
+			BrewingRecipeRegistry.addRecipe(
+				new BetterBrewingRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION.get()));
         });
     }
 
@@ -83,7 +76,6 @@ public class MCCourseMod {
             event.accept(ModItems.ALEXANDRITE);
             event.accept(ModItems.RAW_ALEXANDRITE);
         }
-
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.ALEXANDRITE_BLOCK);
             event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
@@ -93,17 +85,16 @@ public class MCCourseMod {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+		@SuppressWarnings({"Convert2MethodRef", "RedundantSuppression"})
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 ModItemProperties.addCustomItemProperties();
-
             });
         }
     }
