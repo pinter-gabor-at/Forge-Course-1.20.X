@@ -8,23 +8,21 @@ import net.minecraft.world.phys.Vec3;
 // Climbing Effect by SameDifferent: https://github.com/samedifferent/TrickOrTreat/blob/master/LICENSE
 // Distributed under MIT
 public class SlimeyEffect extends MobEffect {
-    public SlimeyEffect(MobEffectCategory pCategory, int pColor) {
-        super(pCategory, pColor);
-    }
+	public SlimeyEffect(MobEffectCategory pCategory, int pColor) {
+		super(pCategory, pColor);
+	}
 
-    @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        if(pLivingEntity.horizontalCollision) {
-            Vec3 initialVec = pLivingEntity.getDeltaMovement();
-            Vec3 climbVec = new Vec3(initialVec.x, 0.2D, initialVec.z);
-            pLivingEntity.setDeltaMovement(climbVec.x * 0.91D, climbVec.y * 0.98D, climbVec.z * 0.91D);
-        }
+	@Override
+	public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+		if (pLivingEntity.horizontalCollision) {
+			Vec3 v = pLivingEntity.getDeltaMovement();
+			pLivingEntity.setDeltaMovement(v.x * 0.91D, v.y * 0.2D, v.z * 0.91D);
+		}
+		super.applyEffectTick(pLivingEntity, pAmplifier);
+	}
 
-        super.applyEffectTick(pLivingEntity, pAmplifier);
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return true;
-    }
+	@Override
+	public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
+		return true;
+	}
 }
